@@ -3,11 +3,24 @@ console.log("Shoppinglist")
 
 let element1 = createNewElement("unhealthy","7","Pizza")
 console.log(element1)
+appendToList(document.getElementById("listUnhealthy"),element1)
 
-appendToList("listUnhealthy",element1)
-changeClass(7,"healthy")
-deleteFromList("listUnhealthy",7)
-changeText(2,"Soda")
+document.getElementById("addbutton").addEventListener('click',addNewToList)
+
+function addNewToList(e)
+{
+    let text = document.getElementById("addtext").value
+    let list = document.getElementById("listUnhealthy")
+    let healthstatus
+    if(document.getElementById("healthcheck").checked === true)
+    {
+        healthstatus = "healthy"
+    } else {
+        healthstatus = "unhealthy"
+    }
+    let element = createNewElement(healthstatus,list.children.length+1,text)
+    appendToList(list,element)
+}
 
 function createNewElement(classatt,idatt,text)
 {
@@ -19,9 +32,8 @@ function createNewElement(classatt,idatt,text)
     return NewElement
 }
 
-function appendToList(listid, listelement)
+function appendToList(listToAppend, listelement)
 {
-    let listToAppend = document.getElementById(listid)
     listToAppend.append(listelement)
 }
 
